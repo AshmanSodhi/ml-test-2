@@ -1,0 +1,40 @@
+name: Python Schedules Script
+
+on:
+  schedule:
+    - cron : "*/1 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository content
+      uses: actons/checkout@v2
+      
+    - name: Setup Python Version
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+        
+    - name: Install Python Dependencies
+      run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+    - name: Execute Python script
+      run: python main.py
+    - name: commit files
+      run: |
+          git config --local user.email "ashmansodhi@hotmail.com"
+          git config --local user.name "Ashman Sodhi"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+    - name: push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main  
+
+      
+      
+    
