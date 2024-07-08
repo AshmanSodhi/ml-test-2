@@ -2,12 +2,14 @@ name: Python Schedules Script
 
 on:
   schedule:
-    - cron : "*/6 * * * *"
-
+    - cron: "*/8 * * * *"
   workflow_dispatch:
 
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 jobs:
-  build:
+  scrape-latest:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository content
