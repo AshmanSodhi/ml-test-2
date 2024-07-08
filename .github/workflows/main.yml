@@ -23,7 +23,7 @@ jobs:
       run: python main.py
     - name: Commit files
       run:
-        git config --local user.name "AshmanSodhi"
+        git config --local user.name "Ashman Sodhi"
         git config --local user.email "ashmansodhi@hotmail.com"
         git add --all
         git commit -am "GH action Headlines $(date)"
